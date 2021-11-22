@@ -1,0 +1,100 @@
+﻿@model IEnumerable<ICEP_System.Models.Bus>
+
+@{
+    ViewBag.Title = "ViewBuses";
+    if (Session["AdminUserName"] == null)
+    {
+        Response.Redirect("~/Home/Admin/", false);
+
+    }
+}
+
+
+
+
+
+
+<h2>Bus Information</h2>
+<h4>Search by From location</h4>
+
+@using (Html.BeginForm("search", "Admin", FormMethod.Get))
+
+{@Html.AntiForgeryToken()
+<div class="form-horizontal">
+
+    <div class="row">
+        <div class="col-md-1">
+            <div class="form-group">
+                <div class="Input-group">
+                    <span class="Input-group-btn">
+                        <lable>Search :</lable>
+                        <input type="text" class="form-control" id="search" name="search" />
+                        <input type="submit" value="Search" class="btn btn-success" />
+                        @Html.ActionLink("Refresh", "ViewBuses", null, new { @class = "btn btn-primary" })
+
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+
+</div>
+}
+
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BusName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FromDestination)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ToDestination)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PickUpTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PickUpCount)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BusName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FromDestination)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ToDestination)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PickUpTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PickUpCount)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditBus", new { id = item.Id }) |
+
+                @Html.ActionLink("Delete", "DeleteBus", new { id = item.Id }) |
+                @Html.ActionLink("ResetRequest", "ResetRequest", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+
+@Html.ActionLink("Create Transport", "CreateBus", "Admin", new { area = "" }, new { @class = "btn btn-primary" })

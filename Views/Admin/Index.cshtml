@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    if (Session["AdminUserName"] == null)
+    {
+        Response.Redirect("~/Home/Admin/", false);
+
+    }
+}
+
+
+<h2>Welcome to the admin site</h2>
+
+<h4>Transport Informations</h4>
+@Html.ActionLink("View Transport", "ViewBuses", "Admin", new { area = "" }, new { @class = "btn btn-primary" })
+@Html.ActionLink("Create Transport", "CreateBus", "Admin", new { area = "" }, new { @class = "btn btn-primary" })
+<h4>Driver Information</h4>
+
+@Html.ActionLink("Create Driver", "CreateDriver", "Admin", new { area = "" }, new { @class = "btn btn-primary" })
+
+@Html.ActionLink("View Driver", "ViewDriver", "Admin", new { area = "" }, new { @class = "btn btn-primary" })
+
+<h4>Students Information</h4>
+@Html.ActionLink("View Students", "ViewStudents", "Admin", new { area = "" }, new { @class = "btn btn-primary" })
+
+<h4>Updates</h4>
+@Html.ActionLink("Post Updates", "CreateDocument", "Admin", new { area = "" }, new { @class = "btn btn-primary" })
+@Html.ActionLink("View Updates", "ViewUpdates", "Admin", new { area = "" }, new { @class = "btn btn-primary" })
+
+
+
+
